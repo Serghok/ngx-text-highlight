@@ -20,12 +20,13 @@ export class HighlightDirective  {
   @Input('content')
   set content(content: string){
     this._content = content;
+    this.highlight();
   }
   get content(): string { return this._content; }
 
   @Input('searchTerm')
   set searchTerm(searchTerm: string){
-    this._searchTerm = searchTerm;
+    this._searchTerm = !searchTerm ? searchTerm : searchTerm.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&');
     this.highlight();
   }
   get searchTerm(): string { return this._searchTerm; }
